@@ -1,0 +1,46 @@
+body {
+    background-color: #0c0b27
+}
+
+#titlebox {
+    background-color: #c876ff;
+    border-style: solid;
+    border-radius: 10px;
+    width: 75%;
+    margin: auto;
+    margin-top: 50px;
+    height: 100px;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 25px;
+    font-size: 62px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 600;
+
+
+}
+
+#buttonContainerMain {
+    margin: auto;
+    width: 50%;
+}
+
+.mainButton {
+    background-color: #c876ff;
+    border-style: solid;
+    border-radius: 10px;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    display: block;
+    height: 75px;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    padding: auto;  
+    
+    
+    
+}
