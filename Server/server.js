@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log(socket.id);
 });
 
 server.listen(8080, () => {
