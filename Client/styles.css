@@ -17,8 +17,6 @@ body {
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     font-style: italic;
     font-weight: 600;
-
-
 }
 
 #buttonContainerMain {
@@ -41,8 +39,6 @@ body {
     font-weight: 600;
     padding: auto;
     cursor: pointer;
-    
-    
 }
 
 h1 {
@@ -53,7 +49,7 @@ h1 {
 }
 
 h2 {
-    font-size: 47px;
+    font-size: 30px;
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     font-style: italic;
     font-weight: 600;
