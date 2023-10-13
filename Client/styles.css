@@ -39,8 +39,34 @@ body {
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     font-style: italic;
     font-weight: 600;
-    padding: auto;  
+    padding: auto;
+    cursor: pointer;
     
     
-    
+}
+
+h1 {
+    font-size: 62px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 47px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 600;
+}
+
+
+#middleContainer {
+    background-color: #c876ff;
+    border-style: solid;
+    border-radius: 10px;
+    width: 35%;
+    margin: auto;
+    text-align: center;
+    display: block;
+    height: 575px;
 }
