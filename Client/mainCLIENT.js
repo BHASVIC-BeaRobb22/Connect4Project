@@ -1,13 +1,11 @@
 var socket = (io);
 
-const joinButton = document.getElementById("joinRoom");
-const joinToMain = document.getElementById("joinToMain");
-
-
-joinButton.addEventListener("click", () => {
+function redirectToJoin() {
     window.location.href = "joinSCREEN.html";
-})
+}
 
-joinToMain.addEventListener("click", () => {
+function redirectToMain() {
     window.location.href = "mainSCREEN.html";
-})
+}
+
+
