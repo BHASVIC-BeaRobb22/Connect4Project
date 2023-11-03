@@ -16,7 +16,23 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => { 
   console.log(socket.id); // Displays socket ID of connected client
+
+socket.on("roomJoinToServer", roomCode => {
+  if (roomCode.length == 0) {
+    socket.emit("roomJoin0Length", "A room code must be entered to join a room");
+  }
+  else if(roomCode.length != 6 && roomCode.length > 0) {
+    socket.emit("roomJoinInvalid", "The room code you have entered is invalid. (Codes must be 6 characters long)");
+  }
+  else {
+    // check if roomCode is present in array (stage 3)
+  }
+
 });
+
+});
+
+
 
 server.listen(8080, () => {
   console.log('Server running on port 8080!');

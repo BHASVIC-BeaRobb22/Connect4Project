@@ -3,6 +3,10 @@
 <head>
     <title>Connect 4 || Main</title>
     <link rel = "stylesheet" href = "styles.css">
+    <script src = "/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+    </script>
 
 
 </head>
@@ -11,7 +15,7 @@
     <div id = "titlebox">Connect 4</div>
     <br>
     <div id = "buttonContainerMain">
-    <button class = "mainButton" type = "button" onclick = "redirectToJoin">JOIN ROOM</button>
+    <button class = "mainButton" type = "button" onclick = "redirectToJoin()">JOIN ROOM</button>
     <br>
     <br>
     <button class = "mainButton" id = "createRoom">CREATE ROOM</button>
@@ -19,11 +23,7 @@
     </div>
 
     
-    <script src = "/socket.io/socket.io.js"></script>
-    <script>
-        var socket = io();
-    </script>
-
+   
 
     <script src = "mainCLIENT.js"></script>
 
