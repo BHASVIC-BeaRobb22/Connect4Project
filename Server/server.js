@@ -21,7 +21,7 @@ socket.on("roomJoinToServer", roomCode => {
   if (roomCode.length == 0) {
     socket.emit("roomJoin0Length", "A room code must be entered to join a room");
   }
-  else if(roomCode.length != 6 && roomCode.length > 0) {
+  else if (roomCode.length != 6 && roomCode.length > 0) {
     socket.emit("roomJoinInvalid", "The room code you have entered is invalid. (Codes must be 6 characters long)");
   }
   else {

@@ -93,6 +93,7 @@ input[type = submit] {
     font-weight: 600;
     padding: auto;
     cursor: pointer;
+
 }
 
 .buttonOnPink {
@@ -110,4 +111,11 @@ input[type = submit] {
     font-weight: 600;
     padding: auto;
     cursor: pointer;
+}
+
+#joinError {
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 600;
 }

@@ -4,9 +4,9 @@
 
     <title>Connect 4 || Join Room</title>
     <link rel = "stylesheet" href = "styles.css">
-    <script src = "http://localhost:8080/socket.io/socket.io.js"></script>
+    <script src = "/socket.io/socket.io.js"></script>
     <script>
-        var socket = io();
+        var socket = io("http://localhost:8080");
     </script>
 
 </head>
@@ -17,7 +17,8 @@
         <h1>Join Room</h1>
         <h2>Room Code:</h2>
         <form id = "roomForm">
-            <input type = "text" id = "roomCodeJoin"><br><br><br>
+            <input type = "text" id = "roomCodeJoin"><br><br>
+            <p id = "joinError"></p><br><br>
             <input type = "submit" value = "JOIN ROOM"><br>
         </form>
         <button type = "button" class = "buttonOnPink" onclick = "redirectToMain()">BACK</button>
