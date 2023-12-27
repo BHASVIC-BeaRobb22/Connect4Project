@@ -1,10 +1,32 @@
+// REDIRECTING TO PAGES
+
 function redirectToJoin() {
-    window.location.href = "joinSCREEN.html";
+    window.location.href = "joinSCREEN.html"; // redirects to join room
 }
 
 function redirectToMain() {
-    window.location.href = "mainSCREEN.html";
+    window.location.href = "mainSCREEN.html"; // redirects to main room
 }
+
+function redirectToLobby() {
+    socket.emit("generateRoomCode", socket.id); // generates a room code on server
+    socket.on("generateCodeComplete", generatedCode => { 
+        localStorage.setItem("lobbyGeneratedCode", generatedCode); // stores generated code in local storage
+        window.location.href = "lobbySCREEN.html"; // redirects to lobby room
+    });
+    
+
+}
+
+// SETTING ROOM CODE DISPLAY OF LOBBY
+
+if (document.getElementById("lobbyCode") !== null) {
+    let lobbyGeneratedCode = localStorage.getItem("lobbyGeneratedCode");
+        console.log(lobbyGeneratedCode);
+        document.getElementById("lobbyCode").innerHTML = lobbyGeneratedCode;
+}
+
+
 
 let roomForm = document.getElementById("roomForm");
 
@@ -16,7 +38,7 @@ if (roomForm !== null) { // checks that the element does exist (i.e. joinSCREEN 
     }
 )}
 
-// These two socket.ons are used to display an error message if the user does not enter a code 6 chars in length
+// ERROR MESSAGES
 
 socket.on("roomJoin0Length", message => {
     document.getElementById("joinError").innerHTML = message;

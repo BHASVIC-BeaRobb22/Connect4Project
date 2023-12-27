@@ -30,6 +30,25 @@ socket.on("roomJoinToServer", roomCode => {
 
 });
 
+socket.on("generateRoomCode", id => {
+ 
+  const count = 6;
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"; // allows the code to be alphanumeric
+  const charlength = chars.length;
+  let codeArray = [];
+  let index = 0;
+
+  for (index = 0; index < count; index++) {
+    let randomNum = Math.floor(Math.random() * (charlength - 1));// returns a random integer in the range 0-61 and sets it to randomNum. This makes sure that a number not in chars can be used
+    codeArray[index] = chars[randomNum]; // Chooses a random char using the random integer generated, and adds it to the new 
+  }
+
+  const generatedCode = codeArray.join("");
+  socket.emit("generateCodeComplete", generatedCode);
+
+});
+
+
 });
 
 

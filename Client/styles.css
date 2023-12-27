@@ -55,6 +55,12 @@ h2 {
     font-weight: 600;
 }
 
+#lobbyCode {
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 600;
+}
 
 #middleContainer {
     background-color: #c876ff;
