@@ -8,6 +8,10 @@ const path = require("path");
 const backwards = path.join(__dirname, '../'); // points to "/Connect 4 Project"
 
 
+let rooms = []; // ROOMS 2D ARRAY
+
+
+
 app.use(express.static(path.join(backwards, "/Client/"))); // allows CSS to be displayed when serving mainSCREEN.html
 
 app.get('/', (req, res) => {
@@ -17,6 +21,16 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => { 
   console.log(socket.id); // Displays socket ID of connected client
 
+
+  socket.on("addUserToRoom", connectingInfo => {
+    rooms.push([connectingInfo.code, connectingInfo.id]); // creates a new entry in rooms 2D array with room and host's id
+    console.log(rooms);
+  
+  });
+  
+  
+  
+
 socket.on("roomJoinToServer", roomCode => {
   if (roomCode.length == 0) {
     socket.emit("roomJoin0Length", "A room code must be entered to join a room");
@@ -25,12 +39,12 @@ socket.on("roomJoinToServer", roomCode => {
     socket.emit("roomJoinInvalid", "The room code you have entered is invalid. (Codes must be 6 characters long)");
   }
   else {
-    // check if roomCode is present in array (stage 3)
+
   }
 
 });
 
-socket.on("generateRoomCode", id => {
+socket.on("generateRoomCode", id => { // GENERATING A ROOM CODE
  
   const count = 6;
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"; // allows the code to be alphanumeric
@@ -39,18 +53,17 @@ socket.on("generateRoomCode", id => {
   let index = 0;
 
   for (index = 0; index < count; index++) {
-    let randomNum = Math.floor(Math.random() * (charlength - 1));// returns a random integer in the range 0-61 and sets it to randomNum. This makes sure that a number not in chars can be used
+    let randomNum = Math.floor(Math.random() * (charlength - 1)); // returns a random integer in the range 0-61 and sets it to randomNum. Need (charlength - 1) as element 62 is not in array
     codeArray[index] = chars[randomNum]; // Chooses a random char using the random integer generated, and adds it to the new 
   }
-
   const generatedCode = codeArray.join("");
   socket.emit("generateCodeComplete", generatedCode);
-
 });
 
 
-});
 
+
+});
 
 
 server.listen(8080, () => {

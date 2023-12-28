@@ -15,18 +15,23 @@ function redirectToLobby() {
         window.location.href = "lobbySCREEN.html"; // redirects to lobby room
     });
     
-
 }
 
 // SETTING ROOM CODE DISPLAY OF LOBBY
 
 if (document.getElementById("lobbyCode") !== null) {
     let lobbyGeneratedCode = localStorage.getItem("lobbyGeneratedCode");
-        console.log(lobbyGeneratedCode);
-        document.getElementById("lobbyCode").innerHTML = lobbyGeneratedCode;
+    document.getElementById("lobbyCode").innerHTML = lobbyGeneratedCode;
+    setTimeout(() => {
+    let connectingInfo = {code: lobbyGeneratedCode, id: socket.id};
+    socket.emit("addUserToRoom", connectingInfo);
+    },100);
+        
+        
 }
 
 
+// SETTING EVENT LISTENER FOR ROOM FORM
 
 let roomForm = document.getElementById("roomForm");
 
