@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+
+    <title>Connect 4 || Lobby Room</title>
+    <link rel = "stylesheet" href = "styles.css">
+    <script src = "/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io("http://localhost:8080");
+    </script>
+
+</head>
+
+<body>
+
+    <div id = "middleContainer">
+        <h1>Lobby Room</h1>
+        <h2>Room Code:</h2>
+        <p id = "lobbyCode"></p>
+
+    </div>
+    <script src = "mainCLIENT.js"></script>
+</body>

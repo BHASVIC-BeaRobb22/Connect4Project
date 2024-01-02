@@ -17,8 +17,6 @@ body {
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     font-style: italic;
     font-weight: 600;
-
-
 }
 
 #buttonContainerMain {
@@ -39,8 +37,91 @@ body {
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     font-style: italic;
     font-weight: 600;
-    padding: auto;  
-    
-    
-    
+    padding: auto;
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 62px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 600;
+}
+
+#lobbyCode {
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 600;
+}
+
+#middleContainer {
+    background-color: #c876ff;
+    border-style: solid;
+    border-radius: 10px;
+    width: 35%;
+    margin: auto;
+    text-align: center;
+    display: block;
+    height: 575px;
+}
+
+input[type = text] {
+    background-color: #c876ff;
+    border: none;
+    border-bottom: 1px solid black;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    padding: auto;
+    text-align: center;
+}
+
+input[type = submit] {
+    background-color: #5040d9;
+    border-style: solid;
+    border-radius: 10px;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    display: block;
+    height: 75px;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    padding: auto;
+    cursor: pointer;
+
+}
+
+.buttonOnPink {
+    background-color: #5040d9;
+    border-style: solid;
+    border-radius: 10px;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    display: block;
+    height: 75px;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    padding: auto;
+    cursor: pointer;
+}
+
+#joinError {
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 600;
 }

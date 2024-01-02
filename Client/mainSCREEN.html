@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Connect 4</title>
+    <title>Connect 4 || Main</title>
     <link rel = "stylesheet" href = "styles.css">
+    <script src = "/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io("http://localhost:8080");
+    </script>
+
+
 </head>
 
 <body>
     <div id = "titlebox">Connect 4</div>
     <br>
     <div id = "buttonContainerMain">
-    <button class = "mainButton">JOIN ROOM</button>
+    <button class = "mainButton" type = "button" onclick = "redirectToJoin()">JOIN ROOM</button>
     <br>
     <br>
-    <button class = "mainButton">CREATE ROOM</button>
-</div>
+    <button class = "mainButton" type = "button" onclick = "redirectToLobby()"e id = "createRoom">CREATE ROOM</button>
+
+    </div>
+   
+
+    <script src = "mainCLIENT.js"></script>
+
 </body>
