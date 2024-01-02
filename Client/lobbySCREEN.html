@@ -17,6 +17,13 @@
         <h2>Room Code:</h2>
         <p id = "lobbyCode"></p>
 
+        <script>
+            var codeText = window.location.href.split('=')[1];
+            let roomCodeText = document.getElementById("lobbyCode");
+            roomCodeText.innerHTML = codeText;
+        </script>
+
+
     </div>
     <script src = "mainCLIENT.js"></script>
 </body>

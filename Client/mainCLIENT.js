@@ -8,27 +8,25 @@ function redirectToMain() {
     window.location.href = "mainSCREEN.html"; // redirects to main room
 }
 
-function redirectToLobby() {
+// CREATING A ROOM
+
+function createToLobby() {
     socket.emit("generateRoomCode", socket.id); // generates a room code on server
-    socket.on("generateCodeComplete", generatedCode => { 
-        localStorage.setItem("lobbyGeneratedCode", generatedCode); // stores generated code in local storage
-        window.location.href = "lobbySCREEN.html"; // redirects to lobby room
+    socket.on("generateCodeComplete", generatedCode => { // awaits for the code to be generated before running
+        window.location.href = "lobbySCREEN.html?code=" + generatedCode; // stores generated code in URL so it can be read in lobbySCREEN.html
     });
     
 }
 
-// SETTING ROOM CODE DISPLAY OF LOBBY
+// JOINING A ROOM
 
-if (document.getElementById("lobbyCode") !== null) {
-    let lobbyGeneratedCode = localStorage.getItem("lobbyGeneratedCode");
-    document.getElementById("lobbyCode").innerHTML = lobbyGeneratedCode;
-    setTimeout(() => {
-    let connectingInfo = {code: lobbyGeneratedCode, id: socket.id};
-    socket.emit("addUserToRoom", connectingInfo);
-    },100);
-        
-        
-}
+socket.on("roomJoinValid", roomCode => {
+    window.location.href = "lobbySCREEN.html?code=" + roomCode;
+});
+
+
+
+
 
 
 // SETTING EVENT LISTENER FOR ROOM FORM
@@ -40,8 +38,14 @@ if (roomForm !== null) { // checks that the element does exist (i.e. joinSCREEN 
         e.preventDefault(); // stops default function of submit button
         var roomJoin = document.getElementById("roomCodeJoin").value;
         socket.emit("roomJoinToServer", roomJoin); // sends roomJoin variable (room code) to server for validation
+        
     }
 )}
+
+
+
+
+
 
 // ERROR MESSAGES
 
@@ -49,5 +53,8 @@ socket.on("roomJoin0Length", message => {
     document.getElementById("joinError").innerHTML = message;
 });
 socket.on("roomJoinInvalid", message => {
+    document.getElementById("joinError").innerHTML = message;
+});
+socket.on("roomNotFound", message => {
     document.getElementById("joinError").innerHTML = message;
 });

@@ -7,8 +7,8 @@ const io = new Server(server);
 const path = require("path");
 const backwards = path.join(__dirname, '../'); // points to "/Connect 4 Project"
 
+var rooms = [];
 
-let rooms = []; // ROOMS 2D ARRAY
 
 
 
@@ -22,15 +22,6 @@ io.on('connection', (socket) => {
   console.log(socket.id); // Displays socket ID of connected client
 
 
-  socket.on("addUserToRoom", connectingInfo => {
-    rooms.push([connectingInfo.code, connectingInfo.id]); // creates a new entry in rooms 2D array with room and host's id
-    console.log(rooms);
-  
-  });
-  
-  
-  
-
 socket.on("roomJoinToServer", roomCode => {
   if (roomCode.length == 0) {
     socket.emit("roomJoin0Length", "A room code must be entered to join a room");
@@ -40,6 +31,21 @@ socket.on("roomJoinToServer", roomCode => {
   }
   else {
 
+    found = 0;
+
+    for (let index = 0; index < (rooms.length - 1); index++) {
+      if (rooms[index] == roomCode) {
+        found = 1;
+      }
+    }
+
+
+    if (found === 1) {
+      socket.emit("roomJoinValid", roomCode);
+    }
+    else {
+      socket.emit("roomNotFound", "The room does not exist, try another code");
+    }
   }
 
 });
@@ -57,10 +63,9 @@ socket.on("generateRoomCode", id => { // GENERATING A ROOM CODE
     codeArray[index] = chars[randomNum]; // Chooses a random char using the random integer generated, and adds it to the new 
   }
   const generatedCode = codeArray.join("");
+  rooms.push(generatedCode);
   socket.emit("generateCodeComplete", generatedCode);
 });
-
-
 
 
 });
