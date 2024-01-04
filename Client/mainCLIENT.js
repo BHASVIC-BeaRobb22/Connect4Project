@@ -18,12 +18,14 @@ function createToLobby() {
     
 }
 
+
+
+
 // JOINING A ROOM
 
 socket.on("roomJoinValid", roomCode => {
     window.location.href = "lobbySCREEN.html?code=" + roomCode;
 });
-
 
 
 

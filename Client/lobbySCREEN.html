@@ -21,6 +21,9 @@
             var codeText = window.location.href.split('=')[1];
             let roomCodeText = document.getElementById("lobbyCode");
             roomCodeText.innerHTML = codeText;
+
+            socket.emit("connectPlayerToRoom", codeText);
+
         </script>
 
 

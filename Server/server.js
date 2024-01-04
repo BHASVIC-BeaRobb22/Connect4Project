@@ -15,14 +15,16 @@ var rooms = [];
 app.use(express.static(path.join(backwards, "/Client/"))); // allows CSS to be displayed when serving mainSCREEN.html
 
 app.get('/', (req, res) => {
-  res.sendFile(backwards + '/Client/mainSCREEN.html'); // serves mainSCREEN.html
+  res.sendFile(backwards + '/Client/mainSCREEN.html'); // serves mainSCREEN.html on connection 
 });
 
 io.on('connection', (socket) => { 
   console.log(socket.id); // Displays socket ID of connected client
 
 
-socket.on("roomJoinToServer", roomCode => {
+// VALIDATING ROOM CODE FOR JOINING
+
+socket.on("roomJoinToServer", roomCode => { 
   if (roomCode.length == 0) {
     socket.emit("roomJoin0Length", "A room code must be entered to join a room");
   }
@@ -31,10 +33,10 @@ socket.on("roomJoinToServer", roomCode => {
   }
   else {
 
-    found = 0;
+    let found = 0;
 
-    for (let index = 0; index < (rooms.length - 1); index++) {
-      if (rooms[index] == roomCode) {
+    for (let index = 0; index < rooms.length; index++) {
+      if (rooms[index] === roomCode) {
         found = 1;
       }
     }
@@ -66,6 +68,33 @@ socket.on("generateRoomCode", id => { // GENERATING A ROOM CODE
   rooms.push(generatedCode);
   socket.emit("generateCodeComplete", generatedCode);
 });
+
+
+
+// CONNECTING USERS TO ROOM
+
+
+socket.on("connectPlayerToRoom", roomCode => {
+  socket.join(roomCode);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 });
