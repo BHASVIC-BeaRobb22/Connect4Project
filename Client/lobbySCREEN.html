@@ -15,14 +15,25 @@
     <div id = "middleContainer">
         <h1>Lobby Room</h1>
         <h2>Room Code:</h2>
-        <p id = "lobbyCode"></p>
+        <p id = "lobbyCode"></p><br><br><br><br>
+        <button type = "button" class = "buttonOnPink" onclick = "redirectToMain()">BACK</button>
 
         <script>
             var codeText = window.location.href.split('=')[1];
-            let roomCodeText = document.getElementById("lobbyCode");
-            roomCodeText.innerHTML = codeText;
 
-            socket.emit("connectPlayerToRoom", codeText);
+            socket.emit("roomCheck", codeText);
+
+            socket.on("codePassed", () => {
+                let roomCodeText = document.getElementById("lobbyCode");
+                roomCodeText.innerHTML = codeText;
+                socket.emit("connectPlayerToRoom", codeText);
+
+            });
+
+            socket.on("codeFailed", () => {
+                window.location.href = "mainSCREEN.html";
+            });
+            
 
         </script>
 

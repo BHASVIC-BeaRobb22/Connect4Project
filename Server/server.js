@@ -10,6 +10,37 @@ const backwards = path.join(__dirname, '../'); // points to "/Connect 4 Project"
 var rooms = [];
 
 
+function checkIfCodeInRooms(roomCode) {
+
+  let found = 0, index = 0;
+
+  while (found == 0 && index < rooms.length) {
+    if (rooms[index] === roomCode) {
+      found = 1;
+    }
+    else {
+      index++;
+    }
+  }
+  return {"found": found, "index": index};
+
+}
+
+function deleteCode(roomCode) {
+
+  console.log(rooms);
+
+  let check = checkIfCodeInRooms(roomCode)
+
+  if (check.found == 1) {
+    rooms.splice(check.index, 1);
+  }
+
+  console.log(rooms);
+
+}
+
+
 
 
 app.use(express.static(path.join(backwards, "/Client/"))); // allows CSS to be displayed when serving mainSCREEN.html
@@ -33,16 +64,7 @@ socket.on("roomJoinToServer", roomCode => {
   }
   else {
 
-    let found = 0;
-
-    for (let index = 0; index < rooms.length; index++) {
-      if (rooms[index] === roomCode) {
-        found = 1;
-      }
-    }
-
-
-    if (found === 1) {
+    if (checkIfCodeInRooms(roomCode).found === 1) {
       socket.emit("roomJoinValid", roomCode);
     }
     else {
@@ -62,7 +84,7 @@ socket.on("generateRoomCode", id => { // GENERATING A ROOM CODE
 
   for (index = 0; index < count; index++) {
     let randomNum = Math.floor(Math.random() * (charlength - 1)); // returns a random integer in the range 0-61 and sets it to randomNum. Need (charlength - 1) as element 62 is not in array
-    codeArray[index] = chars[randomNum]; // Chooses a random char using the random integer generated, and adds it to the new 
+    codeArray[index] = chars[randomNum]; // Chooses a random char using the random integer generated, and adds it to codeArray[]
   }
   const generatedCode = codeArray.join("");
   rooms.push(generatedCode);
@@ -79,22 +101,17 @@ socket.on("connectPlayerToRoom", roomCode => {
 });
 
 
+// CHECKING ROOM CODE IN LOBBY
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+socket.on("roomCheck", roomCode => {
+  if (checkIfCodeInRooms(roomCode).found === 1) {
+    socket.emit("codePassed");
+  }
+  else {
+    socket.emit("codeFailed");
+  }
+});
 
 
 });

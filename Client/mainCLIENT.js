@@ -8,6 +8,7 @@ function redirectToMain() {
     window.location.href = "mainSCREEN.html"; // redirects to main room
 }
 
+
 // CREATING A ROOM
 
 function createToLobby() {
