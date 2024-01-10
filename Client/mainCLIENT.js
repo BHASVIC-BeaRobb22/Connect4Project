@@ -9,10 +9,19 @@ function redirectToMain() {
 }
 
 
+function toMainAndDelete(roomCode) {
+    socket.emit("deleteRoom", roomCode); // deletes room from rooms[]
+
+    socket.on("roomRemoved", () => { // confirms room is deleted before redirecting
+        window.location.href = "mainSCREEN.html"; 
+    })
+}
+
+
 // CREATING A ROOM
 
 function createToLobby() {
-    socket.emit("generateRoomCode", socket.id); // generates a room code on server
+    socket.emit("generateRoomCode"); // generates a room code on server
     socket.on("generateCodeComplete", generatedCode => { // awaits for the code to be generated before running
         window.location.href = "lobbySCREEN.html?code=" + generatedCode; // stores generated code in URL so it can be read in lobbySCREEN.html
     });

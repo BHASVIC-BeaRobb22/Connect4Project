@@ -74,7 +74,7 @@ socket.on("roomJoinToServer", roomCode => {
 
 });
 
-socket.on("generateRoomCode", id => { // GENERATING A ROOM CODE
+socket.on("generateRoomCode", () => { // GENERATING A ROOM CODE
  
   const count = 6;
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"; // allows the code to be alphanumeric
@@ -112,6 +112,17 @@ socket.on("roomCheck", roomCode => {
     socket.emit("codeFailed");
   }
 });
+
+
+// DELETING ROOM CODE FROM LOBBY WHEN BACK BUTTON PRESSED
+
+socket.on("deleteRoom", roomCode => {
+  deleteCode(roomCode);
+  socket.emit("roomRemoved");
+
+});
+
+
 
 
 });
