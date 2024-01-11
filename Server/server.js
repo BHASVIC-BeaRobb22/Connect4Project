@@ -26,6 +26,8 @@ function checkIfCodeInRooms(roomCode) {
 
 }
 
+
+
 function deleteCode(roomCode) {
 
   console.log(rooms);
