@@ -125,3 +125,24 @@ input[type = submit] {
     font-style: italic;
     font-weight: 600;
 }
+
+.gameBoard {
+   
+    position: relative;
+    width: 700px;
+    margin: auto;
+    height: 600px;
+    top: 100px;
+    display: grid;
+    grid-template-columns: repeat(7, 100px);
+    grid-template-rows: repeat(6, 100px);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    justify-content: center;
+}
+
+.space {
+    border-style: solid;
+    border-radius: 10px;
+    border-color:#c876ff;
+}
