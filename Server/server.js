@@ -126,6 +126,30 @@ socket.on("deleteRoom", roomCode => {
 
 
 
+// REDIRECTING BOTH PLAYERS TO GAMESCREEN WHEN 2 PLAYERS ARE IN
+
+
+socket.on("checkPlayersReady", (roomCode) => {
+
+  let clientsInRoom = 0;
+  if (io.sockets.adapter.rooms.has(roomCode)) {
+    clientsInRoom = io.sockets.adapter.rooms.get(roomCode).size;
+   }
+
+  if (clientsInRoom == 2) {
+  io.to(roomCode).emit("redirectBothPlayers");
+  }
+
+
+
+});
+
+
+
+
+
+
+
 
 });
 

@@ -18,6 +18,9 @@ function toMainAndDelete(roomCode) {
 }
 
 
+
+
+
 // CREATING A ROOM
 
 function createToLobby() {

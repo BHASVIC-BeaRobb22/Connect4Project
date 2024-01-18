@@ -15,7 +15,11 @@
     <div id = "middleContainer">
         <h1>Lobby Room</h1>
         <h2>Room Code:</h2>
-        <p id = "lobbyCode"></p><br><br><br><br>
+        <p id = "lobbyCode"></p><br>
+        <p id = "joinTimer"></p>
+        
+        
+        <br><br><br>
         <button type = "button" class = "buttonOnPink" onclick = "toMainAndDelete(codeText)">BACK</button>
 
         <script>
@@ -27,6 +31,26 @@
                 let roomCodeText = document.getElementById("lobbyCode");
                 roomCodeText.innerHTML = codeText;
                 socket.emit("connectPlayerToRoom", codeText);
+
+                socket.emit("checkPlayersReady", codeText);
+
+
+                socket.on("redirectBothPlayers", () => {
+                    
+                    let countdown = document.getElementById("joinTimer");
+                    let count = 5;
+                    setInterval(() => {
+                        if (count == 0) {
+                            window.location.href = "gameSCREEN.html";
+                            clearInterval();
+                        }
+                        else {
+                            countdown.innerHTML = "Redirecting to game in: " + String(count);
+                            count--;
+                        }
+                    }, 1000);
+
+                });
 
             });
 
