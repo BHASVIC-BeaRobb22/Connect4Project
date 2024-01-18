@@ -145,10 +145,40 @@ input[type = submit] {
     border-style: solid;
     border-radius: 10px;
     border-color:#c876ff;
+    display: flex;
+    justify-content: center;
+    
 }
 
 .joinTimer {
     font-size: 20px;
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     font-weight: 600;
+}
+
+
+.pinkToken {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border-style: solid 5px;
+    display: inline-block;
+    background-color: #c876ff;
+    color: #c876ff;
+    margin: auto;
+    padding: auto;
+    
+}
+
+
+.purpleToken {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border-style: solid 5px;
+    display: inline-block;
+    background-color: #5040d9; 
+    color: #5040d9;
+    margin: auto;
+    
 }
