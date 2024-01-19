@@ -9,6 +9,18 @@ const backwards = path.join(__dirname, '../'); // points to "/Connect 4 Project"
 
 var rooms = [];
 
+class Player {
+  constructor(colour, roomCode, socketID) {
+    this.colour = colour;
+    this.roomCode = roomCode;
+    this.id = socketID;
+  }
+
+}
+
+
+
+
 
 function checkIfCodeInRooms(roomCode) {
 
@@ -137,12 +149,32 @@ socket.on("checkPlayersReady", (roomCode) => {
    }
 
   if (clientsInRoom == 2) {
-  io.to(roomCode).emit("redirectBothPlayers");
+    console.log(io.sockets.adapter.rooms.get(roomCode));
+  
+    setOfID = io.sockets.adapter.rooms.get(roomCode);
+
+    const setIter = setOfID.keys();
+
+    console.log(setIter.next().value);
+    console.log(setIter.next().value);
+
+
+
+
+
+
+    io.to(roomCode).emit("redirectBothPlayers");
+
   }
 
 
 
 });
+
+
+// GAME LOGIC
+
+
 
 
 
