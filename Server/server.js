@@ -10,10 +10,10 @@ const backwards = path.join(__dirname, '../'); // points to "/Connect 4 Project"
 var rooms = [];
 
 class Player {
-  constructor(colour, roomCode, socketID) {
-    this.colour = colour;
+  constructor(roomCode, socketID, turn) {
     this.roomCode = roomCode;
     this.id = socketID;
+    this.turn = turn;
   }
 
 }
@@ -112,6 +112,7 @@ socket.on("generateRoomCode", () => { // GENERATING A ROOM CODE
 
 socket.on("connectPlayerToRoom", roomCode => {
   socket.join(roomCode);
+
 });
 
 
@@ -149,20 +150,6 @@ socket.on("checkPlayersReady", (roomCode) => {
    }
 
   if (clientsInRoom == 2) {
-    console.log(io.sockets.adapter.rooms.get(roomCode));
-  
-    setOfID = io.sockets.adapter.rooms.get(roomCode);
-
-    const setIter = setOfID.keys();
-
-    console.log(setIter.next().value);
-    console.log(setIter.next().value);
-
-
-
-
-
-
     io.to(roomCode).emit("redirectBothPlayers");
 
   }
@@ -172,11 +159,44 @@ socket.on("checkPlayersReady", (roomCode) => {
 });
 
 
-// GAME LOGIC
+// GAME
+
+
+
+// CONNECTING PLAYERS TO THE GAME
+
+
+
+socket.on("connectPlayersToGame", roomCode => {
+  socket.join(roomCode)
+  socket.emit("playersConnected");
+  });
 
 
 
 
+
+// STARTING GAME
+
+socket.on("startGame", roomCode => {
+
+    console.log(io.sockets.adapter.rooms.get(roomCode));
+  
+    setOfID = io.sockets.adapter.rooms.get(roomCode);
+
+    const setIter = setOfID.keys();
+
+  // SETTING UP PLAYERS
+
+  player1 = new Player(roomCode, setIter.next().value, 0);
+  player2 = new Player(roomCode, setIter.next().value, 1);
+
+  socket.emit("playerSetupDone", Players);
+
+
+
+
+});
 
 
 

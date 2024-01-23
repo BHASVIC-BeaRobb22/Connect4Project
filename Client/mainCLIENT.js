@@ -58,6 +58,30 @@ if (roomForm !== null) { // checks that the element does exist (i.e. joinSCREEN 
 )}
 
 
+// SETTING UP GAME BOARD
+
+
+function setupBoard() {
+
+    let space = document.getElementsByClassName("space");
+
+    space.addEventListener("click", (e) => {
+    })
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

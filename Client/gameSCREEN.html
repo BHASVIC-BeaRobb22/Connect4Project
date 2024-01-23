@@ -66,6 +66,29 @@
 
     </div>
 
+
+    <script>
+        var codeText = window.location.href.split('=')[1];
+        const connectingInfo = {room: codeText, id: socket.id};
+
+        socket.emit("roomCheck", codeText);
+        socket.emit("connectPlayersToGame", codeText);
+
+        socket.on("playersConnected", () => {
+            setupBoard();
+            socket.emit("startGame", codeText);
+            
+            socket.on("playerSetupDone", Players => {
+                setupBoard(Players);
+            
+        });
+
+    });
+    
+        </script>
+
+
+
  
     <script src = "mainCLIENT.js"></script>
 </body>
