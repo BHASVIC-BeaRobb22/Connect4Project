@@ -147,6 +147,7 @@ input[type = submit] {
     border-color:#c876ff;
     display: flex;
     justify-content: center;
+    cursor: pointer;
     
 }
 

@@ -8,16 +8,16 @@ const path = require("path");
 const backwards = path.join(__dirname, '../'); // points to "/Connect 4 Project"
 
 var rooms = [];
+var turn = 1;
+
 
 class Player {
-  constructor(roomCode, socketID, turn) {
+  constructor(roomCode, socketID) {
     this.roomCode = roomCode;
     this.id = socketID;
-    this.turn = turn;
   }
 
 }
-
 
 
 
@@ -162,6 +162,24 @@ socket.on("checkPlayersReady", (roomCode) => {
 // GAME
 
 
+socket.on("spacePressed", id => {
+
+  console.log("Button pressed by: ", id);
+  if (turn == 1) {
+    if (player1.id == id) {
+      console.log("token placed!")
+    }
+    else {
+      console.log("token not placed!")
+    }
+  }
+
+
+
+});
+
+
+
 
 // CONNECTING PLAYERS TO THE GAME
 
@@ -171,8 +189,6 @@ socket.on("connectPlayersToGame", roomCode => {
   socket.join(roomCode)
   socket.emit("playersConnected");
   });
-
-
 
 
 
@@ -188,10 +204,13 @@ socket.on("startGame", roomCode => {
 
   // SETTING UP PLAYERS
 
-  player1 = new Player(roomCode, setIter.next().value, 0);
-  player2 = new Player(roomCode, setIter.next().value, 1);
+  player1 = new Player(roomCode, setIter.next().value);
+  player2 = new Player(roomCode, setIter.next().value);
+  
+  console.log(player1.id, player2.id);
 
-  socket.emit("playerSetupDone", Players);
+
+  socket.emit("playerSetupDone");
 
 
 

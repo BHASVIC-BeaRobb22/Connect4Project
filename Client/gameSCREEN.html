@@ -16,71 +16,76 @@
 
     <div class = "gameBoard">
 
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
         
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
 
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
 
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
         
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
 
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
-        <div class = "space"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
+        <div class = "space" type = "button"></div>
 
     </div>
 
 
     <script>
         var codeText = window.location.href.split('=')[1];
-        const connectingInfo = {room: codeText, id: socket.id};
+        let space = document.getElementsByClassName("space");
+        
 
         socket.emit("roomCheck", codeText);
         socket.emit("connectPlayersToGame", codeText);
 
         socket.on("playersConnected", () => {
-            setupBoard();
             socket.emit("startGame", codeText);
             
-            socket.on("playerSetupDone", Players => {
-                setupBoard(Players);
-            
+            socket.on("playerSetupDone", () => {
+                let id = socket.id;
+                for (let index = 0; index < space.length; index++) {
+                space[index].addEventListener("click", () => {
+                    socket.emit("spacePressed", id);
+                });
+            }
+                
         });
 
     });
