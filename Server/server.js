@@ -9,7 +9,12 @@ const backwards = path.join(__dirname, '../'); // points to "/Connect 4 Project"
 
 var rooms = [];
 var turn = 1;
-
+var gameBoard = [ [0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0] ]
 
 class Player {
   constructor(roomCode, socketID) {
@@ -53,6 +58,21 @@ function deleteCode(roomCode) {
   console.log(rooms);
 
 }
+
+
+
+
+function placeAndSearch(row, column) {
+
+  for (let index = 6; index > 0; index--) {
+    if (gameBoard[row][index] == "0") {
+      console.log("token placed at row", row, " column", column);
+    }
+  }
+
+}
+
+
 
 
 
@@ -162,18 +182,42 @@ socket.on("checkPlayersReady", (roomCode) => {
 // GAME
 
 
-socket.on("spacePressed", id => {
+socket.on("spacePressed", placementInfo => {
 
+  let id = placementInfo.playerID;
+  let row = parseInt(placementInfo.row);
+  let column = parseInt(placementInfo.column);
+
+  
   console.log("Button pressed by: ", id);
   if (turn == 1) {
     if (player1.id == id) {
-      console.log("token placed!")
+      placeAndSearch(row, column);
+
+
+      turn = 2; // occurs at end of turn
+
+    }
+
+    else {
+      console.log("token not placed!");
+    }
+
+  }
+  else {
+    if (player2.id == id) {
+      console.log("token placed!");
+
+      turn = 1;
     }
     else {
-      console.log("token not placed!")
+      console.log("token not placed!");
     }
   }
 
+
+   
+  
 
 
 });
