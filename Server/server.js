@@ -68,7 +68,7 @@ function placeAndSearch(row, column) {
 
 
   while (placed == 0) {
-    if (gameBoard[row][index] == "0") {
+    if (gameBoard[index][column] == "0") {
       console.log("token placed at row", row, " column", column);
       placed = 1;
     }
