@@ -64,9 +64,13 @@ function deleteCode(roomCode) {
 
 function placeAndSearch(row, column) {
 
-  for (let index = 6; index > 0; index--) {
+  let index = 6, placed = 0;
+
+
+  while (placed == 0) {
     if (gameBoard[row][index] == "0") {
       console.log("token placed at row", row, " column", column);
+      placed = 1;
     }
   }
 
