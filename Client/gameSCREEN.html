@@ -113,6 +113,24 @@
 
 
                     socket.emit("spacePressed", placementInformation);
+
+
+
+                    socket.on("pinkPlaced", rowPlaced => {
+                        rowPlacedString = String(rowPlaced);
+                        spaceFilled = document.querySelector(`[data-row="${rowPlacedString}"][data-column="${columnClicked}"]`);
+                        spaceFilled.style.background = "#c876ff";
+
+                    });
+
+                    socket.on("purplePlaced", rowPlaced => {
+                        rowPlacedString = String(rowPlaced);
+                        spaceFilled = document.querySelector(`[data-row="${rowPlacedString}"][data-column="${columnClicked}"]`);
+                        spaceFilled.style.background = "#5040d9";
+
+                    });
+
+
                 });
             }
                 
