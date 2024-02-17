@@ -9,17 +9,12 @@ const backwards = path.join(__dirname, '../'); // points to "/Connect 4 Project"
 
 var rooms = [];
 var turn = 1;
-var gameBoard = [ [0,0,0,0,0,0,0],
-                  [0,0,0,0,0,0,0],
-                  [0,0,0,0,0,0,0],
-                  [0,0,0,0,0,0,0],
-                  [0,0,0,0,0,0,0],
-                  [0,0,0,0,0,0,0] ]
 
 class Player {
-  constructor(roomCode, socketID) {
+  constructor(roomCode, socketID, gameBoard) {
     this.roomCode = roomCode;
     this.id = socketID;
+    this.gameBoard = gameBoard;
   }
 
 }
@@ -69,8 +64,9 @@ let index = 5, placed = 0;
 
   for (index = 5; index >= 0; index--) {
     if (placed == 0) {
-    if (gameBoard[index][column] === 0) {
-      gameBoard[index][column] = player;
+    if (player1.gameBoard[index][column] === 0) {
+      player1.gameBoard[index][column] = player;
+      player2.gameBoard[index][column] = player;
       console.log("token placed at row", index, " column", column);
       placed = 1;
       return index;
@@ -282,8 +278,8 @@ socket.on("startGame", roomCode => {
 
   // SETTING UP PLAYERS
 
-  player1 = new Player(roomCode, setIter.next().value);
-  player2 = new Player(roomCode, setIter.next().value);
+  player1 = new Player(roomCode, setIter.next().value,[[0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0]]);
+  player2 = new Player(roomCode, setIter.next().value,[[0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0]]);
   
   console.log(player1.id, player2.id);
 
