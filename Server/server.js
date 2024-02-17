@@ -65,20 +65,26 @@ function deleteCode(roomCode) {
 function placeAndSearch(column, player) {
 
 
-  let index = 5, placed = 0;
+let index = 5, placed = 0;
 
-  while (placed == 0 && index >= 0) {
+  for (index = 5; index >= 0; index--) {
+    if (placed == 0) {
     if (gameBoard[index][column] === 0) {
-      gameBoard[index][column] = player; // sets empty array slot to either 1 or 2, depending on who invokes playerSearch()
+      gameBoard[index][column] = player;
       console.log("token placed at row", index, " column", column);
       placed = 1;
+      return index;
     }
-    else {
-      index -= 1;
     }
-  }
 
-return index;
+  } 
+
+
+return -1;
+
+
+
+
 
 }
 
@@ -204,9 +210,17 @@ socket.on("spacePressed", placementInfo => {
   if (turn == 1) {
     if (player1.id == id) {
       rowPlaced = placeAndSearch(column, 1);
-      io.to(roomCode).emit("pinkPlaced", rowPlaced);
-      turn = 2; // occurs at end of turn
 
+      if (rowPlaced != -1) {
+
+      let coords = {row: rowPlaced, column: column};
+
+      io.to(roomCode).emit("pinkPlaced", coords);
+      turn = 2; // occurs at end of turn
+      }
+      else {
+        console.log("token not placed!")
+      }
     }
 
     else {
@@ -217,9 +231,19 @@ socket.on("spacePressed", placementInfo => {
   else {
     if (player2.id == id) {
       rowPlaced = placeAndSearch(column, 2);
-      io.to(roomCode).emit("purplePlaced", rowPlaced);
+
+      if (rowPlaced != -1) {
+
+      let coords = {row: rowPlaced, column: column};
+
+
+      io.to(roomCode).emit("purplePlaced", coords);
       turn = 1;
     }
+    else {
+      console.log("token not placed!");
+    }
+  }
     else {
       console.log("token not placed!");
     }

@@ -116,16 +116,18 @@
 
 
 
-                    socket.on("pinkPlaced", rowPlaced => {
-                        rowPlacedString = String(rowPlaced);
-                        spaceFilled = document.querySelector(`[data-row="${rowPlacedString}"][data-column="${columnClicked}"]`);
+                    socket.on("pinkPlaced", coords => {
+                        rowPlaced = String(coords.row);
+                        columnPlaced = String(coords.column);
+                        spaceFilled = document.querySelector(`[data-row="${rowPlaced}"][data-column="${columnPlaced}"]`);
                         spaceFilled.style.background = "#c876ff";
 
                     });
 
-                    socket.on("purplePlaced", rowPlaced => {
-                        rowPlacedString = String(rowPlaced);
-                        spaceFilled = document.querySelector(`[data-row="${rowPlacedString}"][data-column="${columnClicked}"]`);
+                    socket.on("purplePlaced", coords => {
+                        rowPlaced = String(coords.row);
+                        columnPlaced = String(coords.column);
+                        spaceFilled = document.querySelector(`[data-row="${rowPlaced}"][data-column="${columnPlaced}"]`);
                         spaceFilled.style.background = "#5040d9";
 
                     });
