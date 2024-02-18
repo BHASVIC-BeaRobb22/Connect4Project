@@ -75,11 +75,7 @@ let index = 5, placed = 0;
 
   } 
 
-
 return -1;
-
-
-
 
 
 }
@@ -277,6 +273,10 @@ socket.on("startGame", roomCode => {
     const setIter = setOfID.keys();
 
   // SETTING UP PLAYERS
+
+  // The game board is set as an attribute of both players, as this allows for multiple games to be played.
+  // If the game board is set as a global variable, only one game can properly be played, as the data of that game is saved when loading the next one (except spaces filled in at the client)
+
 
   player1 = new Player(roomCode, setIter.next().value,[[0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0]]);
   player2 = new Player(roomCode, setIter.next().value,[[0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0], [0,0,0,0,0,0,0]]);
