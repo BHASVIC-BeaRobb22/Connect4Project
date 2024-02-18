@@ -117,8 +117,13 @@
 
 
                     socket.on("pinkPlaced", coords => {
+
                         rowPlaced = String(coords.row);
                         columnPlaced = String(coords.column);
+
+                        console.log(rowPlaced, columnPlaced);
+
+
                         spaceFilled = document.querySelector(`[data-row="${rowPlaced}"][data-column="${columnPlaced}"]`);
                         spaceFilled.style.background = "#c876ff"; // pink
 
@@ -127,6 +132,9 @@
                     socket.on("purplePlaced", coords => {
                         rowPlaced = String(coords.row);
                         columnPlaced = String(coords.column);
+
+                        console.log(rowPlaced, columnPlaced);
+
                         spaceFilled = document.querySelector(`[data-row="${rowPlaced}"][data-column="${columnPlaced}"]`);
                         spaceFilled.style.background = "#5040d9"; // purple
 

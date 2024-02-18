@@ -19,6 +19,55 @@ class Player {
 
 }
 
+function horizontal(player) { // traverses gameBoard row by row, checking each column
+
+  let count = 0;
+  let row = 0, column = 0; 
+
+  for (row = 0; row <= 5; row++) {
+    for (column = 0; column <= 6; column++) {
+      if (count == 4) {
+        break;
+      }
+      if (player1.gameBoard[row][column] == player) {
+        count += 1;
+      }
+      else {
+        count = 0;
+      }
+    }
+  }
+
+  console.log("counth: ", count);
+  return count;
+
+}
+
+function vertical(player) { // traverses gameBoard column by column, checking each row
+
+  let count = 0;
+  let row = 0, column = 0; 
+
+  for (row = 0; row <= 6; row++) {
+    for (column = 0; column <= 5; column++) {
+      if (count == 4) {
+        break;
+      }
+      if (player1.gameBoard[column][row] == player) {
+        count += 1;
+      }
+      else {
+        count = 0;
+      }
+    }
+  }
+
+  console.log("countv: ", count);
+  return count;
+
+}
+
+
 
 
 
@@ -79,8 +128,6 @@ return -1;
 
 
 }
-
-
 
 
 
@@ -205,10 +252,21 @@ socket.on("spacePressed", placementInfo => {
 
       if (rowPlaced != -1) {
 
-      let coords = {row: rowPlaced, column: column};
+        let coords = {row: rowPlaced, column: column};
 
-      io.to(roomCode).emit("pinkPlaced", coords);
-      turn = 2; // occurs at end of turn
+        io.to(roomCode).emit("pinkPlaced", coords);
+
+        horizontalCount = horizontal(turn);
+        verticalCount = vertical(turn);
+
+
+
+        if (horizontalCount >= 4 || verticalCount >= 4) {
+          console.log("Player 1 won!");
+        }
+        else {
+          turn = 2; // occurs at end of turn
+        }
       }
       else {
         console.log("token not placed!")
@@ -226,14 +284,24 @@ socket.on("spacePressed", placementInfo => {
 
       if (rowPlaced != -1) {
 
-      let coords = {row: rowPlaced, column: column};
+        let coords = {row: rowPlaced, column: column};
 
 
-      io.to(roomCode).emit("purplePlaced", coords);
-      turn = 1;
+        io.to(roomCode).emit("purplePlaced", coords);
+
+        horizontalCount = horizontal(turn);
+        verticalCount = vertical(turn);
+
+
+        if (horizontalCount >= 4 || verticalCount >= 4) {
+          console.log("Player 2 won!");
+        }
+        else {
+          turn = 1;
+        }
     }
-    else {
-      console.log("token not placed!");
+      else {
+        console.log("token not placed!");
     }
   }
     else {
