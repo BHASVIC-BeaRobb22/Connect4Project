@@ -312,6 +312,9 @@ socket.on("spacePressed", placementInfo => {
       console.log("token not placed!");
     }
   }
+  else {
+    io.to(roomCode).emit("redirectToMain");
+  }
 
 
    
