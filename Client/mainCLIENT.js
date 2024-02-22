@@ -73,3 +73,10 @@ socket.on("roomJoinInvalid", message => {
 socket.on("roomNotFound", message => {
     document.getElementById("joinError").innerHTML = message;
 });
+
+
+// WIN MESSAGE
+
+socket.on("playerWin", message => {
+    alert(message);
+});

@@ -263,6 +263,8 @@ socket.on("spacePressed", placementInfo => {
 
         if (horizontalCount >= 4 || verticalCount >= 4) {
           console.log("Player 1 won!");
+          io.to(roomCode).emit("playerWin", "Player 1 won the game!");
+          turn = 0;
         }
         else {
           turn = 2; // occurs at end of turn
@@ -278,7 +280,7 @@ socket.on("spacePressed", placementInfo => {
     }
 
   }
-  else {
+  else if (turn == 2) {
     if (player2.id == id) {
       rowPlaced = placeAndSearch(column, 2);
 
@@ -295,6 +297,8 @@ socket.on("spacePressed", placementInfo => {
 
         if (horizontalCount >= 4 || verticalCount >= 4) {
           console.log("Player 2 won!");
+          io.to(roomCode).emit("playerWin", "Player 1 won the game!");
+          turn = 0;
         }
         else {
           turn = 1;
